@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 
 // "Mini-baza de date" în memorie — persistă cât timp serverul rulează
 const posts = [
-    { id: 1, title: "Primul meu articol Next.js", author: "Alexutu", content: "Next.js este un framework React fantastic care ne permite sa cream aplicatii web rapide." },
-    { id: 2, title: "De ce iubesc Server Components", author: "Alexutu", content: "Server Components imbunatatesc performanta si securitatea aplicatiilor web." }
+    { id: 1, title: "Primul meu articol Next.js", author: "Alexutu", content: "Next.js este un framework React fantastic care ne permite sa cream aplicatii web rapide.", imageUrl: "https://picsum.photos/seed/picsum1/800/400" },
+    { id: 2, title: "De ce iubesc Server Components", author: "Alexutu", content: "Server Components imbunatatesc performanta si securitatea aplicatiilor web.", imageUrl: "https://picsum.photos/seed/picsum2/800/400" }
 ];
 
 export async function GET() {
@@ -14,7 +14,9 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     // Adăugăm articolul nou în array-ul din memorie
-    const newPost = { id: posts.length + 1, ...body };
+    // Generăm un ID random pentru imagine pentru a avea o variație în layout
+    const randomSeed = Math.floor(Math.random() * 1000);
+    const newPost = { id: posts.length + 1, ...body, imageUrl: `https://picsum.photos/seed/${randomSeed}/800/400` };
     posts.push(newPost);
 
     return NextResponse.json({

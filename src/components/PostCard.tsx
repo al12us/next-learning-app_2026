@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface Post {
   id: number;
   title: string;
   author: string;
   content: string;
+  imageUrl?: string;
 }
 
 export default function PostCard({ post }: { post: Post }) {
@@ -106,7 +108,19 @@ export default function PostCard({ post }: { post: Post }) {
         </div>
       ) : (
         // ── Modul Vizualizare ──
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {post.imageUrl && (
+            <div style={{ width: '100%', height: '200px', position: 'relative', marginBottom: '16px', borderRadius: '8px', overflow: 'hidden' }}>
+              <Image 
+                src={post.imageUrl} 
+                alt={`Cover image for ${post.title}`}
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={post.id <= 2} // Incarcam cu prioritate primele imagini
+              />
+            </div>
+          )}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '12px' }}>
             <h2 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>
               {title}
