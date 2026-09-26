@@ -54,20 +54,7 @@ export default function Navbar() {
           </ul>
         </nav>
 
-        {/* API Endpoint Quick Link */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <a
-            href="/api/posts"
-            target="_blank"
-            rel="noreferrer"
-            className="badge badge-emerald"
-            style={{ textDecoration: 'none', cursor: 'pointer', padding: '6px 12px' }}
-            title="Deschide API-ul JSON direct"
-          >
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }}></span>
-            API Live
-          </a>
-        </div>
+
       </div>
     </header>
   );
