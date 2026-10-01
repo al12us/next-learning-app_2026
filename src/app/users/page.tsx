@@ -12,6 +12,10 @@ interface User {
 
 export default async function UsersPage() {
   const response = await fetch('https://jsonplaceholder.typicode.com/users');
+  
+  // Simulam o întârziere pentru a vedea Skeleton Loader-ul!
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  
   const users: User[] = await response.json();
 
   // Helper pentru generare inițiale

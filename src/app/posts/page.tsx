@@ -2,6 +2,13 @@ import Link from 'next/link';
 import PostForm from '@/components/PostForm';
 import PostCard from '@/components/PostCard';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Articole & Blog 📝 | NextApp',
+  description: 'Citește cele mai noi articole și postează propriile tale creații.',
+};
+
 interface Post {
   id: number;
   title: string;
@@ -14,6 +21,9 @@ export default async function PostsPage() {
   const response = await fetch('http://localhost:3000/api/posts', {
     cache: 'no-store', // Date mereu proaspete (nu din cache static)
   });
+
+  // Simulam o întârziere pentru a vedea Skeleton Loader-ul în acțiune!
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const posts: Post[] = await response.json();
 

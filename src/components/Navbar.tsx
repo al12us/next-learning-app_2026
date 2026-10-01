@@ -35,7 +35,8 @@ export default function Navbar() {
         </Link>
 
         {/* Link-uri de navigare */}
-        <nav>
+        {/* Link-uri de navigare */}
+        <nav style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
           <ul className="nav-links">
             {navItems.map((item) => {
               const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
@@ -52,8 +53,28 @@ export default function Navbar() {
               );
             })}
           </ul>
-        </nav>
 
+          {/* Autentificare */}
+          <div style={{ display: 'flex', gap: '12px', paddingLeft: '24px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+            <Link href="/login" className="btn btn-ghost btn-sm" style={{ padding: '6px 12px' }}>
+              Log in
+            </Link>
+            <Link href="/register" className="btn btn-primary btn-sm" style={{ padding: '6px 12px' }}>
+              Cont Nou
+            </Link>
+            
+            <button 
+              onClick={async () => {
+                await fetch('/api/logout', { method: 'POST' });
+                window.location.href = '/'; // Forțăm refresh complet
+              }}
+              className="btn btn-secondary btn-sm" 
+              style={{ padding: '6px 12px' }}
+            >
+              Ieșire
+            </button>
+          </div>
+        </nav>
 
       </div>
     </header>
