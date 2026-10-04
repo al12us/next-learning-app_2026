@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     }
 
     // Creăm utilizatorul
-    const newUser = authController.register(body);
+    const newUser = await authController.register(body);
 
     return NextResponse.json({ message: "Cont creat cu succes!", user: newUser }, { status: 201 });
     
